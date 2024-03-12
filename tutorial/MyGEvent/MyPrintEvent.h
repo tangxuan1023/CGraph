@@ -18,7 +18,7 @@ public:
      * 在本事件被触发的时候，会执行到这里
      * @return
      */
-    CVoid trigger(CGraph::GEventParamPtr param) override {
+    CVoid trigger(const CGraph::GEventParamPtr& param) override {
         CGRAPH_SLEEP_MILLISECOND(100)    // 留100ms的耗时，便于看出来同步/异步触发机制
 
         /**

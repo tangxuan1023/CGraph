@@ -16,7 +16,7 @@ GEvent::GEvent() {
 
 
 GEvent::~GEvent() {
-    CGRAPH_DELETE_PTR(param_)
+    //CGRAPH_DELETE_PTR(param_)
 }
 
 

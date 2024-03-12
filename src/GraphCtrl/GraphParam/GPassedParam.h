@@ -22,7 +22,7 @@ public:
      * 将外部函数传到内部，如aspect和daemon
      * @param param
      */
-    virtual CVoid clone(GPassedParam* param) = 0;
+    virtual std::unique_ptr<GPassedParam> clone() = 0;
 };
 
 
@@ -34,11 +34,11 @@ using GAspectParam = GPassedParam;
 using GDaemonParam = GPassedParam;
 using GElementParam = GPassedParam;
 using GEventParam = GPassedParam;
-using GPassedParamPtr = GPassedParam *;
-using GAspectParamPtr = GAspectParam *;
-using GDaemonParamPtr = GDaemonParam *;
-using GElementParamPtr = GElementParam *;
-using GEventParamPtr = GEventParam *;
+using GPassedParamPtr = std::unique_ptr<GPassedParam>;
+using GAspectParamPtr = std::unique_ptr<GAspectParam>;
+using GDaemonParamPtr = std::unique_ptr<GDaemonParam>;
+using GElementParamPtr = std::unique_ptr<GElementParam>;
+using GEventParamPtr = std::unique_ptr<GEventParam>;
 
 using GElementParamMap = std::unordered_map<std::string, GElementParamPtr>;
 

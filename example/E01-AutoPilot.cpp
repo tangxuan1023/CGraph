@@ -54,7 +54,7 @@ struct DetectResultGParam : public GParam {
 
 class CameraGDaemon : public GDaemon {
 public:
-    CVoid daemonTask(GDaemonParamPtr param) override {
+    CVoid daemonTask(GDaemonParamPtr& param) override {
         ImageMParam image;
         image.frame_id_ = cur_index_;
         std::string info = "this is " + std::to_string(cur_index_) + " image";

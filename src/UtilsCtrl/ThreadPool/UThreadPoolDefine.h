@@ -31,8 +31,8 @@ static const int CGRAPH_THREAD_SCHED_FIFO = SCHED_FIFO;
     #else
 /** 线程调度策略，暂不支持windows系统 */
 static const int CGRAPH_THREAD_SCHED_OTHER = 0;
-static const int CGRAPH_THREAD_SCHED_RR = 0;
-static const int CGRAPH_THREAD_SCHED_FIFO = 0;
+static const int CGRAPH_THREAD_SCHED_RR = 1;
+static const int CGRAPH_THREAD_SCHED_FIFO = 2;
     #endif
 static const CInt CGRAPH_THREAD_MIN_PRIORITY = 0;                                           // 线程最低优先级
 static const CInt CGRAPH_THREAD_MAX_PRIORITY = 99;                                          // 线程最高优先级

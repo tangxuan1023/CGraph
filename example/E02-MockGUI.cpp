@@ -42,7 +42,7 @@ protected:
 
 
 class ShowGEvent : public GEvent {
-    CVoid trigger(GEventParamPtr param) override {
+    CVoid trigger(const GEventParamPtr& param) override {
         auto p = CGRAPH_GET_GPARAM_WITH_NO_EMPTY(ProcessGParam, EXAMPLE_PARAM_KEY);
         CGRAPH_PARAM_READ_CODE_BLOCK(p);
         p->print();

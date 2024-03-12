@@ -26,7 +26,7 @@ protected:
     }
 
     ~GAspectObject() override {
-        CGRAPH_DELETE_PTR(param_)
+        //CGRAPH_DELETE_PTR(param_)
     }
 
     /**

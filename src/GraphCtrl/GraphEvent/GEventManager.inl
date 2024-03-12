@@ -28,10 +28,12 @@ CStatus GEventManager::createWithParam(const std::string& key, TEParam* param) {
     event->setGParamManager(this->param_manager_);
 
     // 每次创建，都是重新生成参数的一个过程
-    CGRAPH_DELETE_PTR(event->param_)
+    //CGRAPH_DELETE_PTR(event->param_)
     if (nullptr != param) {
-        event->param_ = CGRAPH_SAFE_MALLOC_COBJECT(TEParam);
-        event->param_->clone(param);
+        //event->param_ = CGRAPH_SAFE_MALLOC_COBJECT(TEParam);
+        //event->param_->clone(param);  // not clone semantic, it's copy_from
+        //                              // clone is event->param_ = param->clone();
+        event->param_ = std::move(param->clone());
     }
     events_map_[key] = event;
     CGRAPH_FUNCTION_END

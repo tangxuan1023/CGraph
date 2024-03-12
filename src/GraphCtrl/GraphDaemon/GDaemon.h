@@ -23,7 +23,7 @@ protected:
      * @param param
      * @return
      */
-    virtual CVoid daemonTask(GDaemonParamPtr param) = 0;
+    virtual CVoid daemonTask(GDaemonParamPtr& param) = 0;
 
     /**
      * 获取设置的延时信息

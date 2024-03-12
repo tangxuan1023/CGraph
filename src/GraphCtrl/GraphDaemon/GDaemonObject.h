@@ -23,7 +23,7 @@ protected:
     }
 
     ~GDaemonObject() override {
-        CGRAPH_DELETE_PTR(param_)
+        //CGRAPH_DELETE_PTR(param_)
     }
 
     /**

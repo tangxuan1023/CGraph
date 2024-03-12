@@ -14,6 +14,11 @@
 const static char* CONN_PARAM_KEY = "conn";
 
 struct MyConnParam : public CGraph::GPassedParam {
+    MyConnParam() = default;
+    MyConnParam(const MyConnParam& other)
+     : ip_(other.ip_), port_(other.port_)
+    {
+    }
     /**
      * 必须实现 clone 函数
      * GAspectParam 和 GDaemonParam 均为 GPassedParam的同名内容
@@ -22,14 +27,8 @@ struct MyConnParam : public CGraph::GPassedParam {
      * 故写法为 `: public CGraph::GPassedParam`
      * @param param
      */
-    CVoid clone(CGraph::GPassedParamPtr param) override {
-        if (nullptr == param) {
-            return;    // 异常判断，理论不可能出现此情况
-        }
-
-        auto* ptr = dynamic_cast<MyConnParam *>(param);    // 将传入的参数进行强转，并且赋值到本地
-        ip_ = ptr->ip_;
-        port_ = ptr->port_;
+    std::unique_ptr<GPassedParam> clone() override {
+        return std::unique_ptr<GPassedParam>(new MyConnParam(*this));
     }
 
     std::string ip_ {"0.0.0.0" };

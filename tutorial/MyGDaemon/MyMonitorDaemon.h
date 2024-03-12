@@ -13,7 +13,7 @@
 
 class MyMonitorDaemon : public CGraph::GDaemon {
 public:
-    CVoid daemonTask(CGraph::GDaemonParamPtr param) override {
+    CVoid daemonTask(CGraph::GDaemonParamPtr& param) override {
         CGraph::CGRAPH_ECHO("----> [MyMonitorDaemon] this monitor is still running, monitor span is [%ld] ms...",
                             getInterval());
     }

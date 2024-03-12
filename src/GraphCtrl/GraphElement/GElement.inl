@@ -55,12 +55,11 @@ GElementPtr GElement::addEParam(const std::string& key, T* param) {
     CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(param)
     if (local_params_.end() != local_params_.find(key)) {
         // 如果重复同名key信息，则删除原先的内容
-        CGRAPH_DELETE_PTR(local_params_[key]);
+        //CGRAPH_DELETE_PTR(local_params_[key]);
     }
-    T* cur = CGRAPH_SAFE_MALLOC_COBJECT(T);
-    cur->clone(param);
+    auto cur = param->clone();
 
-    local_params_[key] = cur;    // 写入其中
+    local_params_[key] = std::move(cur);    // 写入其中
     return this;
 }
 
@@ -69,7 +68,7 @@ template<typename T,
         c_enable_if_t<std::is_base_of<GElementParam, T>::value, int> >
 T* GElement::getEParam(const std::string& key) {
     auto iter = local_params_.find(key);
-    return dynamic_cast<T *>((iter != local_params_.end()) ? iter->second : nullptr);
+    return dynamic_cast<T *>((iter != local_params_.end()) ? iter->second.get() : nullptr);
 }
 
 CGRAPH_NAMESPACE_END

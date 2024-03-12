@@ -20,7 +20,7 @@ public:
         index_ = index;
     }
 
-    void daemonTask(CGraph::GDaemonParamPtr param) override {
+    void daemonTask(CGraph::GDaemonParamPtr& param) override {
         CGraph::CGRAPH_ECHO("----> [MyTemplateDaemon] template input index is [%d]", index_);
     }
 

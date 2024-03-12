@@ -18,9 +18,8 @@ template <typename T,
 GAspectObjectPtr GAspectObject::setAParam(T* param) {
     /** 传入的param可以为空 */
     if (param) {
-        CGRAPH_DELETE_PTR(param_)
-        param_ = CGRAPH_SAFE_MALLOC_COBJECT(T)    // 确保param是最新的
-        param_->clone(static_cast<T *>(param));
+        //CGRAPH_DELETE_PTR(param_)
+        param_ = std::move(param->clone());
     }
 
     return this;
@@ -30,12 +29,12 @@ GAspectObjectPtr GAspectObject::setAParam(T* param) {
 template <typename T,
           c_enable_if_t<std::is_base_of<GAspectParam, T>::value, int>>
 T* GAspectObject::getAParam() {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(param_)
+    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(param_.get())
 
     T* param = nullptr;
     if ((typeid(*param_).name() == typeid(T).name())) {
         // 如果类型相同才可以获取成功，否则直接返回nullptr
-        param = dynamic_cast<T *>(this->param_);
+        param = dynamic_cast<T *>(this->param_.get());
     }
     return param;
 }

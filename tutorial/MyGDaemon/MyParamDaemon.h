@@ -15,7 +15,7 @@
 
 class MyParamDaemon : public CGraph::GDaemon {
 public:
-    CVoid daemonTask(CGraph::GDaemonParamPtr param) override {
+    CVoid daemonTask(CGraph::GDaemonParamPtr& param) override {
         /**
          * 从注册的pipeline中获取参数信息
          * 注意，这里是GParam类型
@@ -29,7 +29,7 @@ public:
          * 获取任务外部传入的参数信息
          * 需要强转成外部传入的类型，方法如下：
          */
-        auto connParam = dynamic_cast<MyConnParam *>(param);
+        auto connParam = dynamic_cast<MyConnParam *>(param.get());
         if (connParam) {
             // 对应有参数传入的分支
             CGraph::CGRAPH_ECHO("----> [MyParamDaemon] input param, address is [%s : %d]",

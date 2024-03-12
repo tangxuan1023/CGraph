@@ -24,7 +24,7 @@ protected:
      * @param param 是pipeline那一层，注册进来的参数，可以为空
      * @return
      */
-    virtual CVoid trigger(GEventParamPtr param) = 0;
+    virtual CVoid trigger(const GEventParamPtr& param) = 0;
 
     explicit GEvent();
 
